@@ -1,6 +1,6 @@
 package io.github.ngbrown11.calculator;
 
-public class Financial {
+public class Financial extends Simple {
 	
 	public static double futureValue(double presentValue, double interestRate, int years) {
 		
