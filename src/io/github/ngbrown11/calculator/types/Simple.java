@@ -1,4 +1,4 @@
-package io.github.ngbrown11.calculator;
+package io.github.ngbrown11.calculator.types;
 
 //Five-function calculator
 
