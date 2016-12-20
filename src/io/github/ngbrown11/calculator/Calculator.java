@@ -10,11 +10,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+
+import javax.swing.ButtonGroup;
 import javax.swing.DropMode;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JRadioButtonMenuItem;
 
 public class Calculator extends JFrame {
@@ -47,9 +52,9 @@ public class Calculator extends JFrame {
 	private JButton btnDivide;
 	private JButton btnModulus;
 	private JButton btnReciprocal;
-	private JRadioButtonMenuItem rdbtnmntmSimple;
-	private JRadioButtonMenuItem rdbtnmntmScientific;
-	private JRadioButtonMenuItem rdbtnmntmFinance;
+	private JRadioButtonMenuItem rdbtnSimple;
+	private JRadioButtonMenuItem rdbtnScientific;
+	private JRadioButtonMenuItem rdbtnFinance;
 
 	/**
 	 * Launch the application.
@@ -87,14 +92,19 @@ public class Calculator extends JFrame {
 		setJMenuBar(menuBar);
 		
 		// Create the radio buttons of the "View" menu
-		rdbtnmntmSimple = new JRadioButtonMenuItem("Simple");
-		mnView.add(rdbtnmntmSimple);
+		ButtonGroup bg = new ButtonGroup();	// Group the radio buttons
 		
-		rdbtnmntmScientific = new JRadioButtonMenuItem("Scientific");
-		mnView.add(rdbtnmntmScientific);
+		rdbtnSimple = new JRadioButtonMenuItem("Simple");
+		mnView.add(rdbtnSimple);
+		bg.add(rdbtnSimple);
 		
-		rdbtnmntmFinance = new JRadioButtonMenuItem("Finance");
-		mnView.add(rdbtnmntmFinance);
+		rdbtnScientific = new JRadioButtonMenuItem("Scientific");
+		mnView.add(rdbtnScientific);
+		bg.add(rdbtnScientific);
+		
+		rdbtnFinance = new JRadioButtonMenuItem("Finance");
+		mnView.add(rdbtnFinance);
+		bg.add(rdbtnFinance);
 		
 		// Create the text field for the calc computations
 		text = new JTextField();
@@ -113,7 +123,19 @@ public class Calculator extends JFrame {
 		gbl_buttonPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		buttonPanel.setLayout(gbl_buttonPanel);
 		
+		// Add the calc buttons and methods
 		btnDelete = new JButton("<---");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					text.setText(text.getText().toString()
+							.substring(0, text.getText().toString().length()-1));
+				} catch (StringIndexOutOfBoundsException e) {
+					return;
+				}
+			}
+		});
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.fill = GridBagConstraints.BOTH;
@@ -133,6 +155,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnCe, gbc_btnCe);
 		
 		btnC = new JButton("C");
+		btnC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText("");
+			}
+		});
 		btnC.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btnC = new GridBagConstraints();
 		gbc_btnC.fill = GridBagConstraints.BOTH;
@@ -151,6 +178,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnSqrt, gbc_btnSqrt);
 		
 		btn1 = new JButton("1");
+		btn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "1");
+			}
+		});
 		btn1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn1 = new GridBagConstraints();
 		gbc_btn1.fill = GridBagConstraints.BOTH;
@@ -160,6 +192,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn1, gbc_btn1);
 		
 		btn2 = new JButton("2");
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "2");
+			}
+		});
 		btn2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn2 = new GridBagConstraints();
 		gbc_btn2.fill = GridBagConstraints.BOTH;
@@ -169,6 +206,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn2, gbc_btn2);
 		
 		btn3 = new JButton("3");
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "3");
+			}
+		});
 		btn3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn3 = new GridBagConstraints();
 		gbc_btn3.fill = GridBagConstraints.BOTH;
@@ -196,6 +238,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnModulus, gbc_btnModulus);
 		
 		btn4 = new JButton("4");
+		btn4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "4");
+			}
+		});
 		btn4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn4 = new GridBagConstraints();
 		gbc_btn4.fill = GridBagConstraints.BOTH;
@@ -205,6 +252,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn4, gbc_btn4);
 		
 		btn5 = new JButton("5");
+		btn5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "5");
+			}
+		});
 		btn5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn5 = new GridBagConstraints();
 		gbc_btn5.fill = GridBagConstraints.BOTH;
@@ -214,6 +266,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn5, gbc_btn5);
 		
 		btn6 = new JButton("6");
+		btn6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "6");
+			}
+		});
 		btn6.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn6 = new GridBagConstraints();
 		gbc_btn6.fill = GridBagConstraints.BOTH;
@@ -241,6 +298,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnReciprocal, gbc_btnReciprocal);
 		
 		btn7 = new JButton("7");
+		btn7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "7");
+			}
+		});
 		btn7.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn7 = new GridBagConstraints();
 		gbc_btn7.fill = GridBagConstraints.BOTH;
@@ -250,6 +312,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn7, gbc_btn7);
 		
 		btn8 = new JButton("8");
+		btn8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "8");
+			}
+		});
 		btn8.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn8 = new GridBagConstraints();
 		gbc_btn8.fill = GridBagConstraints.BOTH;
@@ -259,6 +326,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn8, gbc_btn8);
 		
 		btn9 = new JButton("9");
+		btn9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "9");
+			}
+		});
 		btn9.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn9 = new GridBagConstraints();
 		gbc_btn9.fill = GridBagConstraints.BOTH;
@@ -286,6 +358,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnEquals, gbc_btnEquals);
 		
 		btn0 = new JButton("0");
+		btn0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + "0");
+			}
+		});
 		btn0.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btn0 = new GridBagConstraints();
 		gbc_btn0.fill = GridBagConstraints.BOTH;
@@ -296,6 +373,11 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn0, gbc_btn0);
 		
 		btnDecimal = new JButton(".");
+		btnDecimal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				text.setText(text.getText() + ".");
+			}
+		});
 		btnDecimal.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btnDecimal = new GridBagConstraints();
 		gbc_btnDecimal.fill = GridBagConstraints.BOTH;
