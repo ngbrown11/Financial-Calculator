@@ -77,7 +77,7 @@ public class Calculator extends JFrame {
 	 */
 	public Calculator() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 272, 300);
+		setBounds(100, 100, 285, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -127,6 +127,9 @@ public class Calculator extends JFrame {
 		btnDelete = new JButton("<---");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					return;
 				
 				try {
 					text.setText(text.getText().toString()
@@ -180,7 +183,11 @@ public class Calculator extends JFrame {
 		btn1 = new JButton("1");
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "1");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("1");
+				else
+					text.setText(text.getText() + "1");
 			}
 		});
 		btn1.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -194,7 +201,11 @@ public class Calculator extends JFrame {
 		btn2 = new JButton("2");
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "2");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("2");
+				else
+					text.setText(text.getText() + "2");
 			}
 		});
 		btn2.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -208,7 +219,11 @@ public class Calculator extends JFrame {
 		btn3 = new JButton("3");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "3");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("3");
+				else
+					text.setText(text.getText() + "3");
 			}
 		});
 		btn3.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -222,7 +237,11 @@ public class Calculator extends JFrame {
 		btnDivide = new JButton("/");
 		btnDivide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + " / ");
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText(equate(text.getText(), check) + " / ");
+				else
+					text.setText(text.getText() + " / ");
 			}
 		});
 		btnDivide.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -236,7 +255,11 @@ public class Calculator extends JFrame {
 		btnModulus = new JButton("%");
 		btnModulus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + " % ");
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText(equate(text.getText(), check) + " % ");
+				else
+					text.setText(text.getText() + " % ");
 			}
 		});
 		btnModulus.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -250,7 +273,11 @@ public class Calculator extends JFrame {
 		btn4 = new JButton("4");
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "4");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("4");
+				else
+					text.setText(text.getText() + "4");
 			}
 		});
 		btn4.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -264,7 +291,11 @@ public class Calculator extends JFrame {
 		btn5 = new JButton("5");
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "5");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("5");
+				else
+					text.setText(text.getText() + "5");
 			}
 		});
 		btn5.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -278,7 +309,11 @@ public class Calculator extends JFrame {
 		btn6 = new JButton("6");
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "6");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("6");
+				else
+					text.setText(text.getText() + "6");
 			}
 		});
 		btn6.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -292,7 +327,11 @@ public class Calculator extends JFrame {
 		btnMultiply = new JButton("*");
 		btnMultiply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + " * ");
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText(equate(text.getText(), check) + " * ");
+				else
+					text.setText(text.getText() + " * ");
 			}
 		});
 		btnMultiply.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -306,8 +345,12 @@ public class Calculator extends JFrame {
 		btnReciprocal = new JButton("1/x");
 		btnReciprocal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				double reciprocal = 1 / (Double.parseDouble(text.getText()));
-				text.setText("reciproc(" + reciprocal + ")");
+				// double reciprocal = 1 / (Double.parseDouble(text.getText()));
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText("reciproc(" + equate(text.getText(), check) + ")");
+				else
+					text.setText("reciproc(" + text.getText() + ")"); //was reciprocal originally
 			}
 		});
 		btnReciprocal.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -321,7 +364,11 @@ public class Calculator extends JFrame {
 		btn7 = new JButton("7");
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "7");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("7");
+				else
+					text.setText(text.getText() + "7");
 			}
 		});
 		btn7.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -335,7 +382,11 @@ public class Calculator extends JFrame {
 		btn8 = new JButton("8");
 		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "8");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("8");
+				else
+					text.setText(text.getText() + "8");
 			}
 		});
 		btn8.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -349,7 +400,11 @@ public class Calculator extends JFrame {
 		btn9 = new JButton("9");
 		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "9");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("9");
+				else
+					text.setText(text.getText() + "9");
 			}
 		});
 		btn9.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -361,6 +416,15 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btn9, gbc_btn9);
 		
 		btnSub = new JButton("-");
+		btnSub.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText(equate(text.getText(), check) + " - ");
+				else
+					text.setText(text.getText() + " - ");
+			}
+		});
 		btnSub.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_btnSub = new GridBagConstraints();
 		gbc_btnSub.fill = GridBagConstraints.BOTH;
@@ -370,6 +434,16 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnSub, gbc_btnSub);
 		
 		btnEquals = new JButton("=");
+		btnEquals.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText(text.getText() + " = " + equate(text.getText(), check));
+				else {
+					text.setText(text.getText());
+				}
+			}
+		});
 		btnEquals.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_btnEquals = new GridBagConstraints();
 		gbc_btnEquals.fill = GridBagConstraints.BOTH;
@@ -381,7 +455,11 @@ public class Calculator extends JFrame {
 		btn0 = new JButton("0");
 		btn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + "0");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("0");
+				else
+					text.setText(text.getText() + "0");
 			}
 		});
 		btn0.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -396,7 +474,13 @@ public class Calculator extends JFrame {
 		btnDecimal = new JButton(".");
 		btnDecimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				text.setText(text.getText() + ".");
+				String check = operatorFinder(text.getText());
+				if(check == "=")
+					text.setText("0.");
+				else if(text.getText().toString().endsWith("."))
+					text.setText(text.getText());
+				else
+					text.setText(text.getText() + ".");
 			}
 		});
 		btnDecimal.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -408,6 +492,15 @@ public class Calculator extends JFrame {
 		buttonPanel.add(btnDecimal, gbc_btnDecimal);
 		
 		btnAdd = new JButton("+");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String check = operatorFinder(text.getText());
+				if(check != null)
+					text.setText(equate(text.getText(), check) + " + ");
+				else
+					text.setText(text.getText() + " + ");
+			}
+		});
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.fill = GridBagConstraints.BOTH;
@@ -416,6 +509,63 @@ public class Calculator extends JFrame {
 		gbc_btnAdd.gridy = 4;
 		buttonPanel.add(btnAdd, gbc_btnAdd);
 		
+	}
+	
+	public static String operatorFinder(String equation) {
+		
+		String[] operators = {"=", "+", "-", "*", "/", "%", "reciproc"};
+		
+		for(String operator : operators) {
+			if(equation.contains(operator))
+				return operator;
+			else
+				continue;
+		}
+		return null;
+	}
+	
+	public static String equate(String equation, String operator) {
+		
+		String solution = "0";
+		String[] operands;
+		try {
+			switch(operator) {
+			case "=":
+				operands = equation.split(" ");
+				solution = operands[operands.length-1];
+				return solution;
+			case "+":
+				operands = equation.split(" ");
+				solution = String.valueOf(Double.parseDouble(operands[0]) + Double.parseDouble(operands[2]));
+				return solution;
+			case "-":
+				operands = equation.split(" ");
+				solution = String.valueOf(Double.parseDouble(operands[0]) - Double.parseDouble(operands[2]));
+				return solution;
+			case "*":
+				operands = equation.split(" ");
+				solution = String.valueOf(Double.parseDouble(operands[0]) * Double.parseDouble(operands[2]));
+				return solution;
+			case "/":
+				operands = equation.split(" ");
+				solution = String.valueOf(Double.parseDouble(operands[0]) / Double.parseDouble(operands[2]));
+				return solution;
+			case "%":
+				operands = equation.split(" ");
+				solution = String.valueOf(Double.parseDouble(operands[0]) % Double.parseDouble(operands[2]));
+				return solution;
+			case "reciproc":
+				operands = equation.split("(");
+				String[] operand2 = operands[1].split(")");
+				solution = String.valueOf(1 / Double.parseDouble(operand2[0]));
+				return solution;
+			default:
+				return "ERROR";
+			}
+		}
+		catch(NumberFormatException ex) {
+			return "ERROR";
+		}
 	}
 
 }
